@@ -215,20 +215,17 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-//import block from '../assets/block_white.png';
-//import flower_red from '../assets/flower_red.png';
-//import flower_blue from '../assets/flower_blue.png';
 var game;
-var blocksize = 60;
+var numflowers = 0;
 var xblocks = 0;
 var yblocks = 0;
-var numBlueFlowers = 5;
-var numRedFlowers = 5;
-var numBlocks = 50;
-var numflowers = 0;
 var gameOptions = {
   manGravity: 0,
-  manSpeed: 150
+  manSpeed: 150,
+  blocksize: 60,
+  numBlueFlowers: 5,
+  numRedFlowers: 5,
+  numBlocks: 50
 };
 window.onload = function () {
   var gameConfig = {
@@ -252,8 +249,8 @@ window.onload = function () {
     scene: PlayGame
   };
   game = new Phaser.Game(gameConfig);
-  xblocks = game.config.width / blocksize;
-  yblocks = game.config.height / blocksize;
+  xblocks = game.config.width / gameOptions.blocksize;
+  yblocks = game.config.height / gameOptions.blocksize;
   window.focus();
 };
 var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
@@ -289,7 +286,7 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
     key: "create",
     value: function create() {
       var flowers = [];
-      this.scoreText = this.add.text(game.config.width - blocksize, 0, this.score, {
+      this.scoreText = this.add.text(game.config.width - gameOptions.blocksize, 0, this.score, {
         fontSize: "34px",
         fill: "#000000"
       });
@@ -308,9 +305,9 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
         allowGravity: false
       });
       var x, y;
-      for (var i = 0; i < numBlueFlowers; i++) {
-        x = Phaser.Math.Between(1, xblocks - 2) * blocksize + blocksize / 2;
-        y = Phaser.Math.Between(1, yblocks - 2) * blocksize + blocksize / 2;
+      for (var i = 0; i < gameOptions.numBlueFlowers; i++) {
+        x = Phaser.Math.Between(1, xblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
+        y = Phaser.Math.Between(1, yblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
         console.log("blue: ", i, x, y);
         this.blueFlowerGroup.create(x, y, "flowerBlue");
         flowers[i] = {
@@ -319,9 +316,9 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
         };
         numflowers++;
       }
-      for (var _i = 0; _i < numRedFlowers; _i++) {
-        x = Phaser.Math.Between(1, xblocks - 2) * blocksize + blocksize / 2;
-        y = Phaser.Math.Between(1, yblocks - 2) * blocksize + blocksize / 2;
+      for (var _i = 0; _i < gameOptions.numRedFlowers; _i++) {
+        x = Phaser.Math.Between(1, xblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
+        y = Phaser.Math.Between(1, yblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
         console.log("red: ", _i, x, y);
         this.redFlowerGroup.create(x, y, "flowerRed");
         flowers[5 + _i] = {
@@ -330,12 +327,12 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
         };
         numflowers++;
       }
-      for (var _i2 = 0; _i2 < numBlocks; _i2++) {
-        x = Phaser.Math.Between(1, xblocks - 2) * blocksize + blocksize / 2;
-        y = Phaser.Math.Between(1, yblocks - 2) * blocksize + blocksize / 2;
+      for (var _i2 = 0; _i2 < gameOptions.numBlocks; _i2++) {
+        x = Phaser.Math.Between(1, xblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
+        y = Phaser.Math.Between(1, yblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
         console.log("block: ", _i2);
         var allowed = true;
-        for (var j = 0; j < numBlueFlowers + numRedFlowers; j++) {
+        for (var j = 0; j < gameOptions.numBlueFlowers + gameOptions.numRedFlowers; j++) {
           if (x == flowers[j].x && y == flowers[j].y) {
             allowed = false;
             console.log("ei käy");
@@ -346,7 +343,7 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
           console.log(x, y);
         }
       }
-      this.man = this.physics.add.sprite(blocksize / 2, blocksize / 2, "man");
+      this.man = this.physics.add.sprite(gameOptions.blocksize / 2, gameOptions.blocksize / 2, "man");
       this.man.body.gravity.y = gameOptions.manGravity;
       this.physics.add.collider(this.man, this.blockGroup);
       this.physics.add.overlap(this.man, this.blueFlowerGroup, this.collectBlueFlower, null, this);
