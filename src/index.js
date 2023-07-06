@@ -3,8 +3,6 @@ import images from "../assets/*.png";
 
 let game;
 let numflowers = 0;
-let xblocks = 0;
-let yblocks = 0;
 
 const gameOptions = {
   manGravity: 0,
@@ -12,7 +10,9 @@ const gameOptions = {
   blocksize: 60,
   numBlueFlowers: 5,
   numRedFlowers: 5,
-  numBlocks: 50
+  numBlocks: 50,
+  xblocks: 12,
+  yblocks: 12
 }
 
 
@@ -23,8 +23,8 @@ window.onload = function() {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 720,
-        height: 720,
+        width: gameOptions.blocksize * gameOptions.xblocks,
+        height: gameOptions.blocksize * gameOptions.yblocks,
     },
     pixelArt: true,
     physics: {
@@ -39,8 +39,8 @@ window.onload = function() {
   };
   
   game = new Phaser.Game(gameConfig);
-  xblocks = game.config.width / gameOptions.blocksize;
-  yblocks = game.config.height / gameOptions.blocksize;
+//  xblocks = game.config.width / gameOptions.blocksize;
+//  yblocks = game.config.height / gameOptions.blocksize;
   window.focus();
 }
 
@@ -80,25 +80,25 @@ class PlayGame extends Phaser.Scene {
       })
       let x, y;
       for(let i = 0; i < gameOptions.numBlueFlowers; i++) {
-        x = Phaser.Math.Between(1, xblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
-        y = Phaser.Math.Between(1, yblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
-        console.log("blue: ", i, x, y);
+        x = Phaser.Math.Between(1, gameOptions.xblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
+        y = Phaser.Math.Between(1, gameOptions.yblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
+//        console.log("blue: ", i, x, y);
         this.blueFlowerGroup.create(x, y, "flowerBlue");
         flowers[i] = {x: x, y: y};
         numflowers ++;
       }
       for(let i = 0; i < gameOptions.numRedFlowers; i++) {
-        x = Phaser.Math.Between(1, xblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
-        y = Phaser.Math.Between(1, yblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
-        console.log("red: ",i, x, y);
+        x = Phaser.Math.Between(1, gameOptions.xblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
+        y = Phaser.Math.Between(1, gameOptions.yblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
+//        console.log("red: ",i, x, y);
         this.redFlowerGroup.create(x, y, "flowerRed");
         flowers[5 + i] = {x: x, y: y};
         numflowers ++;
       }
       for(let i = 0; i < gameOptions. numBlocks; i++) {
-        x = Phaser.Math.Between(1, xblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
-        y = Phaser.Math.Between(1, yblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
-        console.log("block: ",i);
+        x = Phaser.Math.Between(1, gameOptions.xblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
+        y = Phaser.Math.Between(1, gameOptions.yblocks-2) * gameOptions.blocksize + gameOptions.blocksize/2;
+//        console.log("block: ",i);
         let allowed = true;
         for (let j = 0; j < gameOptions.numBlueFlowers+gameOptions.numRedFlowers; j++) {
           if (x == flowers[j].x && y == flowers[j].y){
@@ -112,10 +112,14 @@ class PlayGame extends Phaser.Scene {
         }
       }
       this.man = this.physics.add.sprite(gameOptions.blocksize/2, gameOptions.blocksize/2, "man");
-      this.man.body.gravity.y = gameOptions.manGravity;
+//      this.man.body.gravity.y = gameOptions.manGravity;
       this.physics.add.collider(this.man, this.blockGroup);
       this.physics.add.overlap(this.man, this.blueFlowerGroup, this.collectBlueFlower, null, this);
       this.physics.add.overlap(this.man, this.redFlowerGroup, this.collectRedFlower, null, this);
+
+      this.butterfly = this.physics.add.sprite(100, 100, "butterfly");
+      this.wasp = this.physics.add.sprite(200, 200, "wasp");
+
       
       this.cursors = this.input.keyboard.createCursorKeys();
     }
