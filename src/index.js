@@ -37,10 +37,8 @@ window.onload = function() {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-//        width: gameOptions.blocksize * gameOptions.xblocks,
-//        height: gameOptions.blocksize * gameOptions.yblocks,
-        width: 1500,
-        height: 1080
+        width: gameOptions.blocksize * gameOptions.xblocks,
+        height: gameOptions.blocksize * gameOptions.yblocks
     },
     pixelArt: true,
     physics: {
@@ -75,7 +73,7 @@ class PlayGame extends Phaser.Scene {
     this.load.spritesheet("wasp", require("../assets/wasp.png"), { frameWidth: 75, frameHeight: 75 });
     this.load.audio("sting", [require("../assets/bzzz.mp3")]);
     this.load.audio("suck", [require("../assets/suck.mp3")]);
-    this.load.tilemapTiledJSON("map", require("../assets/level1.json"));
+    this.load.tilemapTiledJSON("map", require("../assets/map_1.json"));
   }
 
   create() {
