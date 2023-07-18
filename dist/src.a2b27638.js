@@ -221,17 +221,27 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 var game;
 var numflowers = 0;
+var level = 1;
 var gameOptions = {
+  maxlevel: 3,
   manGravity: 0,
   manSpeed: 150,
   blocksize: 60,
+  numMen: 3,
   numBlueFlowers: 5,
-  numRedFlowers: 5,
+  numRedFlowers: 8,
+  redFlowerScore: 20,
+  blueFlowerScore: 10,
+  stingScore: -50,
+  levelScore: 100,
   numBlocks: 50,
-  xblocks: 12,
-  yblocks: 12,
+  xblocks: 14,
+  yblocks: 14,
   butterflySpeed: 120,
-  waspSpeed: 120
+  waspSpeed: 100,
+  enemyInterval: 6000,
+  butterflyRateOfEnemies: 0.8,
+  overlapDistance: 30
 };
 window.onload = function () {
   var gameConfig = {
@@ -292,10 +302,6 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
     key: "create",
     value: function create() {
       var flowers = [];
-      this.scoreText = this.add.text(game.config.width - gameOptions.blocksize, 0, this.score, {
-        fontSize: "34px",
-        fill: "#000000"
-      });
       this.blockGroup = this.physics.add.group({
         immovable: true,
         allowGravity: false
@@ -312,50 +318,66 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
       for (var i = 0; i < gameOptions.numBlueFlowers; i++) {
         x = Phaser.Math.Between(1, gameOptions.xblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
         y = Phaser.Math.Between(1, gameOptions.yblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
-        //        console.log("blue: ", i, x, y);
-        this.blueFlowerGroup.create(x, y, "flowerBlue");
-        flowers[i] = {
-          x: x,
-          y: y
-        };
-        numflowers++;
+        var allowed = true;
+        if (numflowers > 0) {
+          for (var j = 0; j < numflowers; j++) {
+            if (x == flowers[j].x && y == flowers[j].y) {
+              allowed = false;
+              i--;
+              console.log("ei käy");
+              break;
+            }
+          }
+        }
+        if (allowed == true) {
+          this.blueFlowerGroup.create(x, y, "flowerBlue");
+          flowers[i] = {
+            x: x,
+            y: y
+          };
+          numflowers++;
+        }
       }
       for (var _i = 0; _i < gameOptions.numRedFlowers; _i++) {
         x = Phaser.Math.Between(1, gameOptions.xblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
         y = Phaser.Math.Between(1, gameOptions.yblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
-        //        console.log("red: ",i, x, y);
-        this.redFlowerGroup.create(x, y, "flowerRed");
-        flowers[5 + _i] = {
-          x: x,
-          y: y
-        };
-        numflowers++;
+        var _allowed = true;
+        for (var _j = 0; _j < gameOptions.numBlueFlowers; _j++) {
+          if (x == flowers[_j].x && y == flowers[_j].y) {
+            _allowed = false;
+            _i--;
+            console.log("ei käy");
+            break;
+          }
+        }
+        if (_allowed == true) {
+          this.redFlowerGroup.create(x, y, "flowerRed");
+          flowers[5 + _i] = {
+            x: x,
+            y: y
+          };
+          numflowers++;
+        }
       }
       for (var _i2 = 0; _i2 < gameOptions.numBlocks; _i2++) {
         x = Phaser.Math.Between(1, gameOptions.xblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
         y = Phaser.Math.Between(1, gameOptions.yblocks - 2) * gameOptions.blocksize + gameOptions.blocksize / 2;
-        //        console.log("block: ",i);
-        var allowed = true;
-        for (var j = 0; j < gameOptions.numBlueFlowers + gameOptions.numRedFlowers; j++) {
-          if (x == flowers[j].x && y == flowers[j].y) {
-            allowed = false;
+        var _allowed2 = true;
+        for (var _j2 = 0; _j2 < gameOptions.numBlueFlowers + gameOptions.numRedFlowers; _j2++) {
+          if (x == flowers[_j2].x && y == flowers[_j2].y) {
+            _allowed2 = false;
+            _i2--;
             console.log("ei käy");
+            break;
           }
         }
-        if (allowed == true) {
+        if (_allowed2 == true) {
           this.blockGroup.create(x, y, "block");
-          //        console.log(x, y);
         }
       }
-
-      this.man = this.physics.add.sprite(gameOptions.blocksize / 2, gameOptions.blocksize / 2, "man");
-      this.physics.add.collider(this.man, this.blockGroup);
-      this.physics.add.overlap(this.man, this.blueFlowerGroup, this.collectBlueFlower, null, this);
-      this.physics.add.overlap(this.man, this.redFlowerGroup, this.collectRedFlower, null, this);
+      this.man = this.physics.add.sprite(gameOptions.blocksize * 1.5, gameOptions.blocksize * 1.5, "man");
       this.butterflyGroup = this.physics.add.group({});
       this.waspGroup = this.physics.add.group({});
-
-      //      this.gameText = this.add.text(game.config.width/2, 0, `Level ${level}`, {fontSize: "40px", fill: "#000000"})
       this.stingSound = this.sound.add("sting", {
         loop: false
       });
@@ -404,90 +426,125 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
         delay: gameOptions.enemyInterval,
         loop: true
       });
-      this.physics.add.overlap(this.butterflyGroup, this.blueFlowerGroup, this.butterflySucksFlower, null, this);
-      this.physics.add.overlap(this.butterflyGroup, this.redFlowerGroup, this.butterflySucksFlower, null, this);
-      this.physics.add.overlap(this.man, this.waspGroup, this.waspStings, null, this);
+      this.physics.add.collider(this.man, this.blockGroup);
+      this.physics.add.overlap(this.man, this.redFlowerGroup, this.collectFlower, this.isCloseEnoughll, this);
+      this.physics.add.overlap(this.man, this.blueFlowerGroup, this.collectFlower, this.isCloseEnough, this);
+      this.physics.add.overlap(this.butterflyGroup, this.blueFlowerGroup, this.butterflySucksFlower, this.isCloseEnough, this);
+      this.physics.add.overlap(this.butterflyGroup, this.redFlowerGroup, this.butterflySucksFlower, this.isCloseEnough, this);
+      this.physics.add.overlap(this.man, this.waspGroup, this.waspStings, this.isCloseEnough, this);
+      this.gameText = this.add.text(0, 0, "Level ".concat(level), {
+        fontSize: "36px",
+        fill: "#000000",
+        fontStyle: "bold"
+      });
+      this.scoreText = this.add.text(game.config.width - 1.75 * gameOptions.blocksize, gameOptions.blocksize / 2, this.score, {
+        fontSize: "36px",
+        fill: "#000000",
+        fontStyle: "bold"
+      });
+      for (var _i3 = 1; _i3 <= gameOptions.numMen; _i3++) {
+        var img = this.add.image(game.config.width - _i3 * gameOptions.blocksize / 2, gameOptions.blocksize / 4, "man");
+        img.setScale(0.5);
+      }
       this.cursors = this.input.keyboard.createCursorKeys();
     }
   }, {
-    key: "collectBlueFlower",
-    value: function collectBlueFlower(man, flowerBlue) {
+    key: "isCloseEnough",
+    value: function isCloseEnough(body1, body2) {
+      if (Math.abs(body1.body.position.x - body2.body.position.x) < gameOptions.overlapDistance && Math.abs(body1.body.position.y - body2.body.position.y) < gameOptions.overlapDistance) {
+        console.log(body1.body.position.x - body2.body.position.x, body1.body.position.y - body2.body.position.y);
+        return true;
+      }
+      return false;
+    }
+  }, {
+    key: "collectFlower",
+    value: function collectFlower(man, flower) {
       var _this2 = this;
-      flowerBlue.disableBody(true, true);
-      this.score += 10;
-      this.scoreText.setText(this.score);
-      numflowers--;
-      if (numflowers == 0) {
-        this.time.addEvent({
-          delay: 2000,
-          callback: function callback() {
-            _this2.scene.start("PlayGame");
-            _this2.score = 0;
-            numflowers = 0;
-            _this2.flowers = [];
-          },
-          loop: true
-        });
-      }
-    }
-  }, {
-    key: "collectRedFlower",
-    value: function collectRedFlower(man, flowerRed) {
-      var _this3 = this;
-      flowerRed.disableBody(true, true);
-      this.score += 20;
-      this.scoreText.setText(this.score);
-      numflowers--;
-      if (numflowers == 0) {
-        this.time.addEvent({
-          delay: 2000,
-          callback: function callback() {
-            _this3.scene.start("PlayGame");
-            _this3.score = 0;
-            numflowers = 0;
-            _this3.flowers = [];
-          },
-          loop: true
-        });
-      }
-    }
-  }, {
-    key: "butterflySucksFlower",
-    value: function butterflySucksFlower(butterfly, flower) {
-      var _this4 = this;
-      this.suckingSound.play();
       flower.disableBody(true, true);
-      this.score -= 20;
+      console.log(flower.body.gameObject.texture.key);
+      if (flower.body.gameObject.texture.key == "flowerBlue") this.score += gameOptions.blueFlowerScore;else this.score += gameOptions.redFlowerScore;
       this.scoreText.setText(this.score);
       numflowers--;
       if (numflowers == 0) {
-        this.butterflyGroup.setVelocityX = 0;
-        this.butterflyGroup.setVelocityY = 0;
-        this.waspGroup.setVelocityX = 0;
-        this.waspGroup.setVelocityY = 0;
+        this.butterflyGroup.getChildren().forEach(function (element) {
+          _this2.butterflyGroup.killAndHide(element);
+        });
+        this.waspGroup.getChildren().forEach(function (element) {
+          _this2.waspGroup.killAndHide(element);
+        });
+        this.score += gameOptions.levelScore;
+        this.scoreText.setText(this.score);
         if (level == gameOptions.maxlevel) {
           this.gameText.setText("Level ".concat(level, " completed, game finished"));
           this.time.addEvent({
             delay: 2000,
             callback: function callback() {
               numflowers = 0;
-              _this4.score = 0;
-              _this4.flowers = [];
+              _this2.score = 0;
+              _this2.flowers = [];
               level = 1;
-              _this4.scene.start("PlayGame");
+              _this2.scene.start("PlayGame");
             },
             loop: true
           });
-        } else if (numflowers == 0) {
+        } else {
           this.gameText.setText("Level ".concat(level, " completed"));
           this.time.addEvent({
             delay: 2000,
             callback: function callback() {
               level++;
               numflowers = 0;
-              _this4.flowers = [];
+              _this2.flowers = [];
               // seuraava level:
-              _this4.scene.start("PlayGame");
+              _this2.scene.start("PlayGame");
+            },
+            loop: true
+          });
+        }
+      }
+    }
+  }, {
+    key: "butterflySucksFlower",
+    value: function butterflySucksFlower(butterfly, flower) {
+      var _this3 = this;
+      this.suckingSound.play();
+      flower.disableBody(true, true);
+      if (flower.body.gameObject.texture.key == "flowerBlue") this.score -= gameOptions.blueFlowerScore / 2;else this.score -= gameOptions.redFlowerScore / 2;
+      this.scoreText.setText(this.score);
+      numflowers--;
+      if (numflowers == 0) {
+        this.score += gameOptions.levelScore;
+        this.scoreText.setText(this.score);
+        this.butterflyGroup.getChildren().forEach(function (element) {
+          _this3.butterflyGroup.killAndHide(element);
+        });
+        this.waspGroup.getChildren().forEach(function (element) {
+          _this3.waspGroup.killAndHide(element);
+        });
+        if (level == gameOptions.maxlevel) {
+          this.gameText.setText("Level ".concat(level, " completed, game finished"));
+          this.time.addEvent({
+            delay: 2000,
+            callback: function callback() {
+              numflowers = 0;
+              _this3.score = 0;
+              _this3.flowers = [];
+              level = 1;
+              _this3.scene.start("PlayGame");
+            },
+            loop: true
+          });
+        } else {
+          this.gameText.setText("Level ".concat(level, " completed"));
+          this.time.addEvent({
+            delay: 2000,
+            callback: function callback() {
+              level++;
+              numflowers = 0;
+              _this3.flowers = [];
+              // seuraava level:
+              _this3.scene.start("PlayGame");
             },
             loop: true
           });
@@ -497,57 +554,54 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
   }, {
     key: "waspStings",
     value: function waspStings(man, wasp) {
-      var _this5 = this;
+      var _this4 = this;
       this.stingSound.play();
       man.disableBody(true, true);
-      numMen--;
-      this.score -= 50;
+      gameOptions.numMen--;
+      this.score += gameOptions.stingScore;
       this.scoreText.setText(this.score);
-      if (numMen == 0) {
+      if (gameOptions.numMen == 0) {
         this.gameText.setText("Game over");
-        this.butterflyGroup.setVelocityX = 0;
-        this.butterflyGroup.setVelocityY = 0;
-        this.waspGroup.setVelocityX = 0;
-        this.waspGroup.setVelocityY = 0;
-        this.time.addEvent({
-          delay: 2000,
-          callback: function callback() {
-            numflowers = 0;
-            _this5.score = 0;
-            _this5.flowers = [];
-            level = 1;
-            _this5.scene.start("PlayGame");
-          },
-          loop: true
-        });
+        level = 1;
+        this.score = 0;
       }
+      this.butterflyGroup.getChildren().forEach(function (element) {
+        _this4.butterflyGroup.killAndHide(element);
+      });
+      this.waspGroup.getChildren().forEach(function (element) {
+        _this4.waspGroup.killAndHide(element);
+      });
+      this.time.addEvent({
+        delay: 2000,
+        callback: function callback() {
+          numflowers = 0;
+          _this4.flowers = [];
+          _this4.scene.start("PlayGame");
+        },
+        loop: true
+      });
     }
   }, {
     key: "addEnemies",
     value: function addEnemies() {
-      console.log("Adding enemies, ", gameOptions.butterflySpeed, gameOptions.waspSpeed);
-      var num = Phaser.Math.Between(0, 3);
-      console.log(num);
-      if (num >= 1) {
-        console.log("bf");
+      if (Phaser.Math.FloatBetween(0, 1) <= gameOptions.butterflyRateOfEnemies) {
         var bf = this.butterflyGroup.create(Phaser.Math.Between(0, game.config.width), game.config.height, "butterfly");
         bf.setVelocityY(-gameOptions.butterflySpeed);
-        if (bf.body.position.x < game.config.width / 2) {
-          bf.setVelocityX(gameOptions.butterflySpeed / 2);
+        if (Phaser.Math.Between(0, 1)) {
+          bf.setVelocityX(gameOptions.butterflySpeed / 1.7);
           bf.anims.play("bfright", true);
         } else {
-          bf.setVelocityX(-gameOptions.butterflySpeed / 2);
+          bf.setVelocityX(-gameOptions.butterflySpeed / 1.7);
           bf.anims.play("bfleft", true);
         }
       } else {
-        console.log("wasp");
         var w = this.waspGroup.create(Phaser.Math.Between(0, game.config.width), game.config.height, "wasp");
         w.setVelocityY(-gameOptions.waspSpeed);
-        if (w.body.position.x < game.config.width / 2) {
-          w.setVelocityX(gameOptions.waspSpeed / 2);
+        if (Phaser.Math.Between(0, 1)) {
+          w.setVelocityX(gameOptions.waspSpeed / 1.7);
           w.anims.play("waspright", true);
         } else {
-          w.setVelocityX(-gameOptions.waspSpeed / 2);
+          w.setVelocityX(-gameOptions.waspSpeed / 1.7);
           w.anims.play("waspleft", true);
         }
       }
