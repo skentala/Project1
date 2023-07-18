@@ -26,7 +26,7 @@
          "objects":[
                 {
                  "gid":26,
-                 "height":32,
+                 "height":60,
                  "id":2,
                  "name":"",
                  "rotation":0,
@@ -38,7 +38,7 @@
                 }, 
                 {
                  "gid":26,
-                 "height":64,
+                 "height":60,
                  "id":3,
                  "name":"",
                  "rotation":0,
@@ -50,7 +50,7 @@
                 }, 
                 {
                  "gid":26,
-                 "height":32,
+                 "height":60,
                  "id":5,
                  "name":"",
                  "rotation":0,
@@ -62,7 +62,7 @@
                 }, 
                 {
                  "gid":26,
-                 "height":32,
+                 "height":60,
                  "id":6,
                  "name":"",
                  "properties":
