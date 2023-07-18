@@ -225,7 +225,7 @@ module.exports = {
     "name": "Flower Layer Red",
     "objects": [{
       "gid": 26,
-      "height": 32,
+      "height": 60,
       "id": 2,
       "name": "",
       "rotation": 0,
@@ -236,7 +236,7 @@ module.exports = {
       "y": 96
     }, {
       "gid": 26,
-      "height": 64,
+      "height": 60,
       "id": 3,
       "name": "",
       "rotation": 0,
@@ -247,7 +247,7 @@ module.exports = {
       "y": 352
     }, {
       "gid": 26,
-      "height": 32,
+      "height": 60,
       "id": 5,
       "name": "",
       "rotation": 0,
@@ -258,7 +258,7 @@ module.exports = {
       "y": 256
     }, {
       "gid": 26,
-      "height": 32,
+      "height": 60,
       "id": 6,
       "name": "",
       "properties": {
@@ -351,7 +351,7 @@ var gameOptions = {
   maxlevel: 3,
   manGravity: 0,
   manSpeed: 150,
-  blocksize: 32,
+  blocksize: 60,
   numMen: 3,
   numBlueFlowers: 5,
   numRedFlowers: 8,
@@ -375,8 +375,10 @@ window.onload = function () {
     scale: {
       mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,
-      width: gameOptions.blocksize * gameOptions.xblocks,
-      height: gameOptions.blocksize * gameOptions.yblocks
+      //        width: gameOptions.blocksize * gameOptions.xblocks,
+      //        height: gameOptions.blocksize * gameOptions.yblocks,
+      width: 1500,
+      height: 1080
     },
     pixelArt: true,
     physics: {
@@ -428,10 +430,11 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
     key: "create",
     value: function create() {
       var flowers = [];
-      this.map = this.make.tilemap("level1");
-      var tiles = this.map.addTilesetImage("block");
+      var map = this.make.tilemap("level1");
+      console.log(map);
+      var tiles = map.addTilesetImage("block");
       console.log(tiles);
-      var layer = this.map.createLayer("Tile Layer", tiles);
+      var layer = map.createLayer("Tile Layer", tiles);
       this.blockGroup = this.physics.add.group({
         immovable: true,
         allowGravity: false

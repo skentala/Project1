@@ -10,7 +10,7 @@ const gameOptions = {
   maxlevel: 3,
   manGravity: 0,
   manSpeed: 150,
-  blocksize: 32,
+  blocksize: 60,
   numMen: 3,
   numBlueFlowers: 5,
   numRedFlowers: 8,
@@ -36,8 +36,10 @@ window.onload = function() {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: gameOptions.blocksize * gameOptions.xblocks,
-        height: gameOptions.blocksize * gameOptions.yblocks,
+//        width: gameOptions.blocksize * gameOptions.xblocks,
+//        height: gameOptions.blocksize * gameOptions.yblocks,
+        width: 1500,
+        height: 1080
     },
     pixelArt: true,
     physics: {
@@ -78,10 +80,11 @@ class PlayGame extends Phaser.Scene {
   create() {
     let flowers = [];
 
-    this.map = this.make.tilemap("level1");
-    const tiles = this.map.addTilesetImage("block");
+    const map = this.make.tilemap("level1");
+    console.log(map);
+    const tiles = map.addTilesetImage("block");
     console.log(tiles);
-    const layer = this.map.createLayer("Tile Layer", tiles);
+    const layer = map.createLayer("Tile Layer", tiles);
 
     this.blockGroup = this.physics.add.group({
       immovable: true,
