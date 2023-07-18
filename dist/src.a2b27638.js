@@ -200,7 +200,7 @@ module.exports = {
 module.exports = "/bzzz.dbc72e92.mp3";
 },{}],"assets/suck.mp3":[function(require,module,exports) {
 module.exports = "/suck.12e85f33.mp3";
-},{}],"assets/level_1.json":[function(require,module,exports) {
+},{}],"assets/level1.json":[function(require,module,exports) {
 module.exports = {
   "height": 18,
   "layers": [{
@@ -220,12 +220,324 @@ module.exports = {
     "width": 50,
     "x": 0,
     "y": 0
+  }, {
+    "draworder": "topdown",
+    "name": "Coin Object Layer",
+    "objects": [{
+      "gid": 3221225498,
+      "height": 32,
+      "id": 2,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 128,
+      "y": 96
+    }, {
+      "gid": 26,
+      "height": 64,
+      "id": 3,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 64,
+      "x": 64,
+      "y": 352
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 5,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 288,
+      "y": 256
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 6,
+      "name": "",
+      "properties": {
+        "alpha": 0.25
+      },
+      "propertytypes": {
+        "alpha": "float"
+      },
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 448,
+      "y": 96
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 7,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 544,
+      "y": 128
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 8,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 576,
+      "y": 128
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 9,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 448,
+      "y": 320
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 10,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 416,
+      "y": 512
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 11,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 448,
+      "y": 512
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 12,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 352,
+      "y": 544
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 13,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 512,
+      "y": 544
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 14,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 640,
+      "y": 416
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 15,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 704,
+      "y": 288
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 16,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 704,
+      "y": 160
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 17,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 800,
+      "y": 544
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 18,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 896,
+      "y": 320
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 19,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1024,
+      "y": 160
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 20,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1056,
+      "y": 160
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 21,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1184,
+      "y": 256
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 22,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1216,
+      "y": 256
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 24,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1248,
+      "y": 256
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 25,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1408,
+      "y": 128
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 26,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1376,
+      "y": 384
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 27,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1312,
+      "y": 448
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 28,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1280,
+      "y": 512
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 29,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1440,
+      "y": 448
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 30,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 32,
+      "x": 1504,
+      "y": 512
+    }],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
   }],
   "nextobjectid": 33,
   "orientation": "orthogonal",
   "renderorder": "right-down",
   "tiledversion": "1.0.3",
-  "tileheight": 32,
+  "tileheight": 60,
   "tilesets": [{
     "columns": 25,
     "firstgid": 1,
@@ -247,6 +559,18 @@ module.exports = {
         "bounce": "string"
       }
     },
+    "tilewidth": 60
+  }, {
+    "columns": 6,
+    "firstgid": 26,
+    "image": "..\/..\/sprites\/coin.png",
+    "imageheight": 60,
+    "imagewidth": 60,
+    "margin": 0,
+    "name": "coin",
+    "spacing": 0,
+    "tilecount": 6,
+    "tileheight": 60,
     "tilewidth": 60
   }],
   "tilewidth": 60,
@@ -355,22 +679,21 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
       });
       this.load.audio("sting", [require("../assets/bzzz.mp3")]);
       this.load.audio("suck", [require("../assets/suck.mp3")]);
-      this.load.tilemapTiledJSON("map", require("../assets/level_1.json"));
+      this.load.tilemapTiledJSON("map", require("../assets/level1.json"));
     }
   }, {
     key: "create",
     value: function create() {
       var flowers = [];
-      this.add.image(40, 40, "block");
-      var map = this.make.tilemap({
-        key: "map"
-      });
-      map.tileWidth = 60;
-      map.tileHeight = 60;
-      console.log(map);
-      var tiles = map.addTilesetImage("block");
-      console.log(tiles);
-      var layer = map.createStaticLayer("Tile Layer", tiles);
+
+      //    const map = this.make.tilemap({key: "map"});
+      //    map.tileWidth = 60;
+      //    map.tileHeight = 60;
+      //    console.log(map);
+      //    const tiles = map.addTilesetImage("block");
+      //    console.log(tiles);
+      //    const layer = map.createStaticLayer("Tile Layer", tiles);
+
       this.blockGroup = this.physics.add.group({
         immovable: true,
         allowGravity: false
@@ -692,7 +1015,7 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
   }]);
   return PlayGame;
 }(Phaser.Scene);
-},{"./styles.css":"src/styles.css","../assets/*.png":"assets/*.png","../assets/block_grey.png":"assets/block_grey.png","../assets/flower_blue.png":"assets/flower_blue.png","../assets/flower_red.png":"assets/flower_red.png","../assets/man.png":"assets/man.png","../assets/Butterfly.png":"assets/Butterfly.png","../assets/wasp.png":"assets/wasp.png","../assets/bzzz.mp3":"assets/bzzz.mp3","../assets/suck.mp3":"assets/suck.mp3","../assets/level_1.json":"assets/level_1.json"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./styles.css":"src/styles.css","../assets/*.png":"assets/*.png","../assets/block_grey.png":"assets/block_grey.png","../assets/flower_blue.png":"assets/flower_blue.png","../assets/flower_red.png":"assets/flower_red.png","../assets/man.png":"assets/man.png","../assets/Butterfly.png":"assets/Butterfly.png","../assets/wasp.png":"assets/wasp.png","../assets/bzzz.mp3":"assets/bzzz.mp3","../assets/suck.mp3":"assets/suck.mp3","../assets/level1.json":"assets/level1.json"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
