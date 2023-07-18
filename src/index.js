@@ -73,7 +73,7 @@ class PlayGame extends Phaser.Scene {
     this.load.spritesheet("wasp", require("../assets/wasp.png"), { frameWidth: 75, frameHeight: 75 });
     this.load.audio("sting", [require("../assets/bzzz.mp3")]);
     this.load.audio("suck", [require("../assets/suck.mp3")]);
-    this.load.tilemapTiledJSON("map", require("../assets/map_1.json"));
+    this.load.tilemapTiledJSON("map", require("../assets/map_level1.json"));
   }
 
   create() {
