@@ -19,72 +19,6 @@
          "width":20,
          "x":0,
          "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "name":"Flower Layer Red",
-         "objects":[
-                {
-                 "gid":26,
-                 "height":60,
-                 "id":2,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":60,
-                 "x":128,
-                 "y":96
-                }, 
-                {
-                 "gid":26,
-                 "height":60,
-                 "id":3,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":60,
-                 "x":64,
-                 "y":352
-                }, 
-                {
-                 "gid":26,
-                 "height":60,
-                 "id":5,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":60,
-                 "x":288,
-                 "y":256
-                }, 
-                {
-                 "gid":26,
-                 "height":60,
-                 "id":6,
-                 "name":"",
-                 "properties":
-                    {
-                     "alpha":0.25
-                    },
-                 "propertytypes":
-                    {
-                     "alpha":"float"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":60,
-                 "x":448,
-                 "y":96
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
         }],
  "nextobjectid":33,
  "orientation":"orthogonal",
@@ -117,19 +51,6 @@
                  "bounce":"string"
                 }
             },
-         "tilewidth":60
-        }, 
-        {
-         "columns":6,
-         "firstgid":26,
-         "image":"..\/assets\/flower_red.png",
-         "imageheight":60,
-         "imagewidth":60,
-         "margin":0,
-         "name":"flower_red",
-         "spacing":0,
-         "tilecount":6,
-         "tileheight":60,
          "tilewidth":60
         }],
  "tilewidth":60,
