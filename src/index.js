@@ -10,7 +10,7 @@ const gameOptions = {
   maxlevel: 3,
   manGravity: 0,
   manSpeed: 150,
-  blocksize: 60,
+  blocksize: 32,
   numMen: 3,
   numBlueFlowers: 5,
   numRedFlowers: 8,
@@ -72,10 +72,16 @@ class PlayGame extends Phaser.Scene {
     this.load.spritesheet("wasp", require("../assets/wasp.png"), { frameWidth: 75, frameHeight: 75 });
     this.load.audio("sting", [require("../assets/bzzz.mp3")]);
     this.load.audio("suck", [require("../assets/suck.mp3")]);
+    this.load.tilemapTiledJSON('level1', require("../assets/level1.json"));
   }
 
   create() {
     let flowers = [];
+
+    this.map = this.make.tilemap("level1");
+    const tiles = this.map.addTilesetImage("block");
+    console.log(tiles);
+    const layer = this.map.createLayer("Tile Layer", tiles);
 
     this.blockGroup = this.physics.add.group({
       immovable: true,
@@ -210,7 +216,6 @@ class PlayGame extends Phaser.Scene {
 
   isCloseEnough(body1, body2) {
     if (Math.abs(body1.body.position.x - body2.body.position.x) < gameOptions.overlapDistance && Math.abs(body1.body.position.y - body2.body.position.y) < gameOptions.overlapDistance) {
-      console.log(body1.body.position.x-body2.body.position.x, body1.body.position.y-body2.body.position.y);
       return true;
     }
     return false;
@@ -218,7 +223,6 @@ class PlayGame extends Phaser.Scene {
 
   collectFlower(man, flower) {
     flower.disableBody(true, true);
-    console.log(flower.body.gameObject.texture.key);
     if (flower.body.gameObject.texture.key == "flowerBlue") this.score += gameOptions.blueFlowerScore;
     else this.score += gameOptions.redFlowerScore;
     this.scoreText.setText(this.score);

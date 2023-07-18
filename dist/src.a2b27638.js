@@ -200,6 +200,131 @@ module.exports = {
 module.exports = "/bzzz.dbc72e92.mp3";
 },{}],"assets/suck.mp3":[function(require,module,exports) {
 module.exports = "/suck.12e85f33.mp3";
+},{}],"assets/level1.json":[function(require,module,exports) {
+module.exports = {
+  "height": 18,
+  "layers": [{
+    "data": "AQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAEAAAABAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAJAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAsAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAACwAAAAsAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAACQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAACQAAAAEAAAABAAAAAQAAAAEAAAABAAAACQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAA",
+    "encoding": "base64",
+    "height": 18,
+    "name": "Tile Layer",
+    "opacity": 1,
+    "properties": {
+      "collides": "true"
+    },
+    "propertytypes": {
+      "collides": "string"
+    },
+    "type": "tilelayer",
+    "visible": true,
+    "width": 20,
+    "x": 0,
+    "y": 0
+  }, {
+    "draworder": "topdown",
+    "name": "Flower Layer Red",
+    "objects": [{
+      "gid": 26,
+      "height": 32,
+      "id": 2,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 60,
+      "x": 128,
+      "y": 96
+    }, {
+      "gid": 26,
+      "height": 64,
+      "id": 3,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 60,
+      "x": 64,
+      "y": 352
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 5,
+      "name": "",
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 60,
+      "x": 288,
+      "y": 256
+    }, {
+      "gid": 26,
+      "height": 32,
+      "id": 6,
+      "name": "",
+      "properties": {
+        "alpha": 0.25
+      },
+      "propertytypes": {
+        "alpha": "float"
+      },
+      "rotation": 0,
+      "type": "",
+      "visible": true,
+      "width": 60,
+      "x": 448,
+      "y": 96
+    }],
+    "opacity": 1,
+    "type": "objectgroup",
+    "visible": true,
+    "x": 0,
+    "y": 0
+  }],
+  "nextobjectid": 33,
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "tiledversion": "1.0.3",
+  "tileheight": 60,
+  "tilesets": [{
+    "columns": 25,
+    "firstgid": 1,
+    "image": "..\/assets\/block_grey.png",
+    "imageheight": 60,
+    "imagewidth": 60,
+    "margin": 0,
+    "name": "block_grey",
+    "spacing": 0,
+    "tilecount": 25,
+    "tileheight": 60,
+    "tileproperties": {
+      "1": {
+        "bounce": "1"
+      }
+    },
+    "tilepropertytypes": {
+      "1": {
+        "bounce": "string"
+      }
+    },
+    "tilewidth": 60
+  }, {
+    "columns": 6,
+    "firstgid": 26,
+    "image": "..\/assets\/flower_red.png",
+    "imageheight": 60,
+    "imagewidth": 60,
+    "margin": 0,
+    "name": "flower_red",
+    "spacing": 0,
+    "tilecount": 6,
+    "tileheight": 60,
+    "tilewidth": 60
+  }],
+  "tilewidth": 60,
+  "type": "map",
+  "version": 1,
+  "width": 30
+};
 },{}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -226,7 +351,7 @@ var gameOptions = {
   maxlevel: 3,
   manGravity: 0,
   manSpeed: 150,
-  blocksize: 60,
+  blocksize: 32,
   numMen: 3,
   numBlueFlowers: 5,
   numRedFlowers: 8,
@@ -297,11 +422,16 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
       });
       this.load.audio("sting", [require("../assets/bzzz.mp3")]);
       this.load.audio("suck", [require("../assets/suck.mp3")]);
+      this.load.tilemapTiledJSON('level1', require("../assets/level1.json"));
     }
   }, {
     key: "create",
     value: function create() {
       var flowers = [];
+      this.map = this.make.tilemap("level1");
+      var tiles = this.map.addTilesetImage("block");
+      console.log(tiles);
+      var layer = this.map.createLayer("Tile Layer", tiles);
       this.blockGroup = this.physics.add.group({
         immovable: true,
         allowGravity: false
@@ -452,7 +582,6 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
     key: "isCloseEnough",
     value: function isCloseEnough(body1, body2) {
       if (Math.abs(body1.body.position.x - body2.body.position.x) < gameOptions.overlapDistance && Math.abs(body1.body.position.y - body2.body.position.y) < gameOptions.overlapDistance) {
-        console.log(body1.body.position.x - body2.body.position.x, body1.body.position.y - body2.body.position.y);
         return true;
       }
       return false;
@@ -462,7 +591,6 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
     value: function collectFlower(man, flower) {
       var _this2 = this;
       flower.disableBody(true, true);
-      console.log(flower.body.gameObject.texture.key);
       if (flower.body.gameObject.texture.key == "flowerBlue") this.score += gameOptions.blueFlowerScore;else this.score += gameOptions.redFlowerScore;
       this.scoreText.setText(this.score);
       numflowers--;
@@ -625,7 +753,7 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
   }]);
   return PlayGame;
 }(Phaser.Scene);
-},{"./styles.css":"src/styles.css","../assets/*.png":"assets/*.png","../assets/block_grey.png":"assets/block_grey.png","../assets/flower_blue.png":"assets/flower_blue.png","../assets/flower_red.png":"assets/flower_red.png","../assets/man.png":"assets/man.png","../assets/Butterfly.png":"assets/Butterfly.png","../assets/wasp.png":"assets/wasp.png","../assets/bzzz.mp3":"assets/bzzz.mp3","../assets/suck.mp3":"assets/suck.mp3"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./styles.css":"src/styles.css","../assets/*.png":"assets/*.png","../assets/block_grey.png":"assets/block_grey.png","../assets/flower_blue.png":"assets/flower_blue.png","../assets/flower_red.png":"assets/flower_red.png","../assets/man.png":"assets/man.png","../assets/Butterfly.png":"assets/Butterfly.png","../assets/wasp.png":"assets/wasp.png","../assets/bzzz.mp3":"assets/bzzz.mp3","../assets/suck.mp3":"assets/suck.mp3","../assets/level1.json":"assets/level1.json"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
