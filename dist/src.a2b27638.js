@@ -196,7 +196,11 @@ module.exports = {
   "man": require("./man.png"),
   "wasp": require("./wasp.png")
 };
-},{"./Butterfly.png":"assets/Butterfly.png","./block_grey.png":"assets/block_grey.png","./block_white.png":"assets/block_white.png","./flower_blue.png":"assets/flower_blue.png","./flower_red.png":"assets/flower_red.png","./man.png":"assets/man.png","./wasp.png":"assets/wasp.png"}],"src/index.js":[function(require,module,exports) {
+},{"./Butterfly.png":"assets/Butterfly.png","./block_grey.png":"assets/block_grey.png","./block_white.png":"assets/block_white.png","./flower_blue.png":"assets/flower_blue.png","./flower_red.png":"assets/flower_red.png","./man.png":"assets/man.png","./wasp.png":"assets/wasp.png"}],"assets/bzzz.mp3":[function(require,module,exports) {
+module.exports = "/bzzz.dbc72e92.mp3";
+},{}],"assets/suck.mp3":[function(require,module,exports) {
+module.exports = "/suck.12e85f33.mp3";
+},{}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 require("./styles.css");
@@ -225,7 +229,9 @@ var gameOptions = {
   numRedFlowers: 5,
   numBlocks: 50,
   xblocks: 12,
-  yblocks: 12
+  yblocks: 12,
+  butterflySpeed: 120,
+  waspSpeed: 120
 };
 window.onload = function () {
   var gameConfig = {
@@ -249,8 +255,6 @@ window.onload = function () {
     scene: PlayGame
   };
   game = new Phaser.Game(gameConfig);
-  //  xblocks = game.config.width / gameOptions.blocksize;
-  //  yblocks = game.config.height / gameOptions.blocksize;
   window.focus();
 };
 var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
@@ -281,6 +285,8 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
         frameWidth: 75,
         frameHeight: 75
       });
+      this.load.audio("sting", [require("../assets/bzzz.mp3")]);
+      this.load.audio("suck", [require("../assets/suck.mp3")]);
     }
   }, {
     key: "create",
@@ -290,8 +296,6 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
         fontSize: "34px",
         fill: "#000000"
       });
-
-      //      this.add.image(blocksize/2, blocksize/2, "man")
       this.blockGroup = this.physics.add.group({
         immovable: true,
         allowGravity: false
@@ -340,16 +344,69 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
         }
         if (allowed == true) {
           this.blockGroup.create(x, y, "block");
-          console.log(x, y);
+          //        console.log(x, y);
         }
       }
+
       this.man = this.physics.add.sprite(gameOptions.blocksize / 2, gameOptions.blocksize / 2, "man");
-      //      this.man.body.gravity.y = gameOptions.manGravity;
       this.physics.add.collider(this.man, this.blockGroup);
       this.physics.add.overlap(this.man, this.blueFlowerGroup, this.collectBlueFlower, null, this);
       this.physics.add.overlap(this.man, this.redFlowerGroup, this.collectRedFlower, null, this);
-      this.butterfly = this.physics.add.sprite(100, 100, "butterfly");
-      this.wasp = this.physics.add.sprite(200, 200, "wasp");
+      this.butterflyGroup = this.physics.add.group({});
+      this.waspGroup = this.physics.add.group({});
+
+      //      this.gameText = this.add.text(game.config.width/2, 0, `Level ${level}`, {fontSize: "40px", fill: "#000000"})
+      this.stingSound = this.sound.add("sting", {
+        loop: false
+      });
+      this.suckingSound = this.sound.add("suck", {
+        loop: false
+      });
+
+      // perhosen lento:
+      this.anims.create({
+        key: "bfleft",
+        frames: this.anims.generateFrameNumbers("butterfly", {
+          start: 2,
+          end: 3
+        }),
+        frameRate: 5,
+        repeat: -1
+      });
+      this.anims.create({
+        key: "bfright",
+        frames: this.anims.generateFrameNumbers("butterfly", {
+          start: 0,
+          end: 1
+        }),
+        frameRate: 5,
+        repeat: -1
+      });
+
+      // ampiaisen lento:
+      this.anims.create({
+        key: "waspleft",
+        frames: this.anims.generateFrameNumbers("wasp", {
+          frames: [0]
+        }),
+        repeat: 0
+      });
+      this.anims.create({
+        key: "waspright",
+        frames: this.anims.generateFrameNumbers("wasp", {
+          frames: [1]
+        }),
+        repeat: 0
+      });
+      this.triggerTimer = this.time.addEvent({
+        callback: this.addEnemies,
+        callbackScope: this,
+        delay: gameOptions.enemyInterval,
+        loop: true
+      });
+      this.physics.add.overlap(this.butterflyGroup, this.blueFlowerGroup, this.butterflySucksFlower, null, this);
+      this.physics.add.overlap(this.butterflyGroup, this.redFlowerGroup, this.butterflySucksFlower, null, this);
+      this.physics.add.overlap(this.man, this.waspGroup, this.waspStings, null, this);
       this.cursors = this.input.keyboard.createCursorKeys();
     }
   }, {
@@ -395,12 +452,111 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
       }
     }
   }, {
+    key: "butterflySucksFlower",
+    value: function butterflySucksFlower(butterfly, flower) {
+      var _this4 = this;
+      this.suckingSound.play();
+      flower.disableBody(true, true);
+      this.score -= 20;
+      this.scoreText.setText(this.score);
+      numflowers--;
+      if (numflowers == 0) {
+        this.butterflyGroup.setVelocityX = 0;
+        this.butterflyGroup.setVelocityY = 0;
+        this.waspGroup.setVelocityX = 0;
+        this.waspGroup.setVelocityY = 0;
+        if (level == gameOptions.maxlevel) {
+          this.gameText.setText("Level ".concat(level, " completed, game finished"));
+          this.time.addEvent({
+            delay: 2000,
+            callback: function callback() {
+              numflowers = 0;
+              _this4.score = 0;
+              _this4.flowers = [];
+              level = 1;
+              _this4.scene.start("PlayGame");
+            },
+            loop: true
+          });
+        } else if (numflowers == 0) {
+          this.gameText.setText("Level ".concat(level, " completed"));
+          this.time.addEvent({
+            delay: 2000,
+            callback: function callback() {
+              level++;
+              numflowers = 0;
+              _this4.flowers = [];
+              // seuraava level:
+              _this4.scene.start("PlayGame");
+            },
+            loop: true
+          });
+        }
+      }
+    }
+  }, {
+    key: "waspStings",
+    value: function waspStings(man, wasp) {
+      var _this5 = this;
+      this.stingSound.play();
+      man.disableBody(true, true);
+      numMen--;
+      this.score -= 50;
+      this.scoreText.setText(this.score);
+      if (numMen == 0) {
+        this.gameText.setText("Game over");
+        this.butterflyGroup.setVelocityX = 0;
+        this.butterflyGroup.setVelocityY = 0;
+        this.waspGroup.setVelocityX = 0;
+        this.waspGroup.setVelocityY = 0;
+        this.time.addEvent({
+          delay: 2000,
+          callback: function callback() {
+            numflowers = 0;
+            _this5.score = 0;
+            _this5.flowers = [];
+            level = 1;
+            _this5.scene.start("PlayGame");
+          },
+          loop: true
+        });
+      }
+    }
+  }, {
+    key: "addEnemies",
+    value: function addEnemies() {
+      console.log("Adding enemies, ", gameOptions.butterflySpeed, gameOptions.waspSpeed);
+      var num = Phaser.Math.Between(0, 3);
+      console.log(num);
+      if (num >= 1) {
+        console.log("bf");
+        var bf = this.butterflyGroup.create(Phaser.Math.Between(0, game.config.width), game.config.height, "butterfly");
+        bf.setVelocityY(-gameOptions.butterflySpeed);
+        if (bf.body.position.x < game.config.width / 2) {
+          bf.setVelocityX(gameOptions.butterflySpeed / 2);
+          bf.anims.play("bfright", true);
+        } else {
+          bf.setVelocityX(-gameOptions.butterflySpeed / 2);
+          bf.anims.play("bfleft", true);
+        }
+      } else {
+        console.log("wasp");
+        var w = this.waspGroup.create(Phaser.Math.Between(0, game.config.width), game.config.height, "wasp");
+        w.setVelocityY(-gameOptions.waspSpeed);
+        if (w.body.position.x < game.config.width / 2) {
+          w.setVelocityX(gameOptions.waspSpeed / 2);
+          w.anims.play("waspright", true);
+        } else {
+          w.setVelocityX(-gameOptions.waspSpeed / 2);
+          w.anims.play("waspleft", true);
+        }
+      }
+    }
+  }, {
     key: "update",
     value: function update() {
       if (this.cursors.left.isDown) {
-        if (this.man.body.position.x > 0) {
-          this.man.body.velocity.x = -gameOptions.manSpeed;
-        }
+        this.man.body.velocity.x = -gameOptions.manSpeed;
       } else if (this.cursors.right.isDown) {
         this.man.body.velocity.x = gameOptions.manSpeed;
       } else if (this.cursors.up.isDown) {
@@ -415,7 +571,7 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
   }]);
   return PlayGame;
 }(Phaser.Scene);
-},{"./styles.css":"src/styles.css","../assets/*.png":"assets/*.png","../assets/block_grey.png":"assets/block_grey.png","../assets/flower_blue.png":"assets/flower_blue.png","../assets/flower_red.png":"assets/flower_red.png","../assets/man.png":"assets/man.png","../assets/Butterfly.png":"assets/Butterfly.png","../assets/wasp.png":"assets/wasp.png"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./styles.css":"src/styles.css","../assets/*.png":"assets/*.png","../assets/block_grey.png":"assets/block_grey.png","../assets/flower_blue.png":"assets/flower_blue.png","../assets/flower_red.png":"assets/flower_red.png","../assets/man.png":"assets/man.png","../assets/Butterfly.png":"assets/Butterfly.png","../assets/wasp.png":"assets/wasp.png","../assets/bzzz.mp3":"assets/bzzz.mp3","../assets/suck.mp3":"assets/suck.mp3"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
