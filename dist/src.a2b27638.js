@@ -200,7 +200,7 @@ module.exports = {
 module.exports = "/bzzz.dbc72e92.mp3";
 },{}],"assets/suck.mp3":[function(require,module,exports) {
 module.exports = "/suck.12e85f33.mp3";
-},{}],"assets/level1.json":[function(require,module,exports) {
+},{}],"assets/level_1.json":[function(require,module,exports) {
 module.exports = {
   "height": 18,
   "layers": [{
@@ -217,66 +217,7 @@ module.exports = {
     },
     "type": "tilelayer",
     "visible": true,
-    "width": 20,
-    "x": 0,
-    "y": 0
-  }, {
-    "draworder": "topdown",
-    "name": "Flower Layer Red",
-    "objects": [{
-      "gid": 26,
-      "height": 60,
-      "id": 2,
-      "name": "",
-      "rotation": 0,
-      "type": "",
-      "visible": true,
-      "width": 60,
-      "x": 128,
-      "y": 96
-    }, {
-      "gid": 26,
-      "height": 60,
-      "id": 3,
-      "name": "",
-      "rotation": 0,
-      "type": "",
-      "visible": true,
-      "width": 60,
-      "x": 64,
-      "y": 352
-    }, {
-      "gid": 26,
-      "height": 60,
-      "id": 5,
-      "name": "",
-      "rotation": 0,
-      "type": "",
-      "visible": true,
-      "width": 60,
-      "x": 288,
-      "y": 256
-    }, {
-      "gid": 26,
-      "height": 60,
-      "id": 6,
-      "name": "",
-      "properties": {
-        "alpha": 0.25
-      },
-      "propertytypes": {
-        "alpha": "float"
-      },
-      "rotation": 0,
-      "type": "",
-      "visible": true,
-      "width": 60,
-      "x": 448,
-      "y": 96
-    }],
-    "opacity": 1,
-    "type": "objectgroup",
-    "visible": true,
+    "width": 50,
     "x": 0,
     "y": 0
   }],
@@ -284,15 +225,15 @@ module.exports = {
   "orientation": "orthogonal",
   "renderorder": "right-down",
   "tiledversion": "1.0.3",
-  "tileheight": 60,
+  "tileheight": 32,
   "tilesets": [{
     "columns": 25,
     "firstgid": 1,
-    "image": "..\/assets\/block_grey.png",
+    "image": "..\/block_grey.png",
     "imageheight": 60,
     "imagewidth": 60,
     "margin": 0,
-    "name": "block_grey",
+    "name": "block",
     "spacing": 0,
     "tilecount": 25,
     "tileheight": 60,
@@ -307,23 +248,11 @@ module.exports = {
       }
     },
     "tilewidth": 60
-  }, {
-    "columns": 6,
-    "firstgid": 26,
-    "image": "..\/assets\/flower_red.png",
-    "imageheight": 60,
-    "imagewidth": 60,
-    "margin": 0,
-    "name": "flower_red",
-    "spacing": 0,
-    "tilecount": 6,
-    "tileheight": 60,
-    "tilewidth": 60
   }],
   "tilewidth": 60,
   "type": "map",
   "version": 1,
-  "width": 30
+  "width": 50
 };
 },{}],"src/index.js":[function(require,module,exports) {
 "use strict";
@@ -344,6 +273,8 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+//import maps from "../assets/*.json";
+
 var game;
 var numflowers = 0;
 var level = 1;
@@ -424,17 +355,22 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
       });
       this.load.audio("sting", [require("../assets/bzzz.mp3")]);
       this.load.audio("suck", [require("../assets/suck.mp3")]);
-      this.load.tilemapTiledJSON('level1', require("../assets/level1.json"));
+      this.load.tilemapTiledJSON("map", require("../assets/level_1.json"));
     }
   }, {
     key: "create",
     value: function create() {
       var flowers = [];
-      var map = this.make.tilemap("level1");
+      this.add.image(40, 40, "block");
+      var map = this.make.tilemap({
+        key: "map"
+      });
+      map.tileWidth = 60;
+      map.tileHeight = 60;
       console.log(map);
       var tiles = map.addTilesetImage("block");
       console.log(tiles);
-      var layer = map.createLayer("Tile Layer", tiles);
+      var layer = map.createStaticLayer("Tile Layer", tiles);
       this.blockGroup = this.physics.add.group({
         immovable: true,
         allowGravity: false
@@ -756,7 +692,7 @@ var PlayGame = /*#__PURE__*/function (_Phaser$Scene) {
   }]);
   return PlayGame;
 }(Phaser.Scene);
-},{"./styles.css":"src/styles.css","../assets/*.png":"assets/*.png","../assets/block_grey.png":"assets/block_grey.png","../assets/flower_blue.png":"assets/flower_blue.png","../assets/flower_red.png":"assets/flower_red.png","../assets/man.png":"assets/man.png","../assets/Butterfly.png":"assets/Butterfly.png","../assets/wasp.png":"assets/wasp.png","../assets/bzzz.mp3":"assets/bzzz.mp3","../assets/suck.mp3":"assets/suck.mp3","../assets/level1.json":"assets/level1.json"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./styles.css":"src/styles.css","../assets/*.png":"assets/*.png","../assets/block_grey.png":"assets/block_grey.png","../assets/flower_blue.png":"assets/flower_blue.png","../assets/flower_red.png":"assets/flower_red.png","../assets/man.png":"assets/man.png","../assets/Butterfly.png":"assets/Butterfly.png","../assets/wasp.png":"assets/wasp.png","../assets/bzzz.mp3":"assets/bzzz.mp3","../assets/suck.mp3":"assets/suck.mp3","../assets/level_1.json":"assets/level_1.json"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

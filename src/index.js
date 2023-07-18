@@ -1,5 +1,6 @@
 import "./styles.css";
 import images from "../assets/*.png";
+//import maps from "../assets/*.json";
 
 let game;
 let numflowers = 0;
@@ -61,7 +62,7 @@ window.onload = function() {
 class PlayGame extends Phaser.Scene {
 
   constructor() {
-      super("PlayGame")
+      super("PlayGame");
       this.score = 0;
   }
 
@@ -74,17 +75,20 @@ class PlayGame extends Phaser.Scene {
     this.load.spritesheet("wasp", require("../assets/wasp.png"), { frameWidth: 75, frameHeight: 75 });
     this.load.audio("sting", [require("../assets/bzzz.mp3")]);
     this.load.audio("suck", [require("../assets/suck.mp3")]);
-    this.load.tilemapTiledJSON('level1', require("../assets/level1.json"));
+    this.load.tilemapTiledJSON("map", require("../assets/map1.json"));
   }
 
   create() {
     let flowers = [];
+    this.add.image(40,40,"block")
 
-    const map = this.make.tilemap("level1");
+    const map = this.make.tilemap({key: "map"});
+    map.tileWidth = 60;
+    map.tileHeight = 60;
     console.log(map);
     const tiles = map.addTilesetImage("block");
     console.log(tiles);
-    const layer = map.createLayer("Tile Layer", tiles);
+    const layer = map.createStaticLayer("Tile Layer", tiles);
 
     this.blockGroup = this.physics.add.group({
       immovable: true,
